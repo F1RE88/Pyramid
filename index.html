@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pyramids of Giza - Ancient Egypt Experience</title>
+    <title>Pyramids</title>
+    <link rel="icon" href="icon.png">
     <style>
         /* Base styles */
         * {
@@ -323,6 +324,11 @@
                 font-size: 2rem;
             }
         }
+        .t{
+                border: rgb(246, 255, 0) groove;
+                width: 300px;
+                border-radius: 25px;
+            }
     </style>
 </head>
 <body>
@@ -399,18 +405,14 @@
                     </div>
                     <h3>Amun-Ra</h3>
                     <p>Your Ancient Egyptian Guide</p>
-                </div>
-                
-                <div class="ai-controls">
-                    <div class="voice-controls">
-                        <button class="mic-btn" id="mic-btn">
-                            <i>🎤</i>
-                        </button>
-                        <p id="status">Click the microphone and speak</p>
-                    </div>
-                    
-                    <div class="response-area" id="response-area">
-                        Welcome, traveler! I am Amun-Ra, a scribe from the time of the pharaohs. Ask me about the great pyramids, our beliefs, or daily life in ancient Egypt. Simply press the microphone and speak your question.
+                    <div style="font-family: 'Courier New', Courier, monospace; color: rgb(234, 255, 0);"><h2 style="font-family: 'Courier New', Courier, monospace; color: rgb(234, 255, 0);">Some Questions To Ask Him About</h2>
+                    <center>
+                    <p class="t">1 - how did you build the pyramids</p>
+                    <p class="t">2 - why did you drink beer</p>
+                    <p class="t">3 - what is the sphinx</p>
+                    <p class="t">4 - was there a slave's at the ancient egypt</p>
+                    <p class="t">5 - what was the language of the ancient egyptians</p>
+                    </center>
                     </div>
                 </div>
             </div>
@@ -421,177 +423,23 @@
         </footer>
     </div>
 
-    <script>
-        // AI Guide functionality
-        const micBtn = document.getElementById('mic-btn');
-        const statusText = document.getElementById('status');
-        const responseArea = document.getElementById('response-area');
-        const aiMouth = document.getElementById('ai-mouth');
-        
-        // Predefined responses for the AI guide
-        const responses = {
-            'hello': 'Greetings, traveler! I am Amun-Ra, a scribe from ancient Egypt. How may I assist you on your journey through time?',
-            'who built the pyramids': 'The great pyramids were built by skilled Egyptian workers, not slaves as some believe. They were well-fed and housed in nearby workers\' villages during construction.',
-            'how old are the pyramids': 'The pyramids at Giza were built around 2580 to 2560 BCE, making them over 4,500 years old!',
-            'what is inside the pyramids': 'Inside the pyramids are burial chambers for the pharaohs, along with passageways and sometimes smaller chambers for the queen and valuable possessions for the afterlife.',
-            'why were the pyramids built': 'Pyramids were built as monumental tombs for pharaohs, designed to protect their bodies and possessions for the afterlife, where they would continue their divine rule.',
-            'tell me about ancient egypt': 'Ancient Egypt was a civilization along the Nile River known for its pyramids, pharaohs, hieroglyphic writing, and advanced knowledge in mathematics, medicine, and astronomy.',
-            'what is the sphinx': 'The Great Sphinx is a mythical creature with the body of a lion and the head of a human, believed to represent the pharaoh Khafre. It guards the Giza plateau.',
-            'how were the pyramids built': 'The pyramids were built using massive limestone blocks quarried nearby. Workers used ramps, sleds, and levers to move and position these enormous stones with remarkable precision.',
-            'who is the pharaoh': 'The pharaoh was the ruler of ancient Egypt, considered a divine intermediary between the gods and the people. The pyramids were built to ensure their successful journey to the afterlife.',
-            'what is the afterlife': 'We Egyptians believed in an afterlife where the soul would journey to the Field of Reeds. The body had to be preserved through mummification, and possessions were buried with the deceased for use in the next world.',
-            'default': 'I am not certain about that, traveler. Perhaps you could ask me about the pyramids, ancient Egyptian beliefs, or daily life along the Nile.',
-            'who is sobek': 'Sobek is the crocodile god who dwells in the Nile. He represents the power of the pharaoh and the fertility of the river.',
-            'who is sekhmet': 'She is the lioness goddess of war and healing. Her breath is the hot desert wind, and she protects the pharaoh in battle.',
-            'who is hathor': 'Hathor is the goddess of love, music, and joy. She often appears as a cow or a woman with cow ears, welcoming the dead to the afterlife.',
-            'who is ma\'at': 'Ma\'at is the goddess of truth, justice, and harmony. She is the order of the universe. Without her, the world would fall into chaos.',
-            'who is amun': 'Amun was a local god of Thebes who rose to become the King of Gods, often combined with Ra to become Amun-Ra. He is the hidden one.',
-            'who is nut': 'Nut is the sky goddess, arching over the earth. Her body is filled with stars, and she swallows the sun every evening to birth it again at dawn.',
-            'who is geb': 'Geb is the god of the earth and the husband of Nut. His laughter creates earthquakes, and he allows the crops to grow.',
-            'who is ptah': 'Ptah is the creator god of Memphis. It is believed he thought the world into existence and spoke the names of all things.',
-            'what is an ankh': 'The Ankh is the symbol of life itself. You will often see gods holding it to the nose of the pharaoh to give him the breath of life.',
-            'what is the eye of horus': 'It is a symbol of protection, royal power, and good health. We use it in mathematics and as an amulet to ward off evil.',
-            'what is a scarab': 'The scarab beetle represents Khepri, the rising sun. Just as the beetle rolls a ball of dung, Khepri rolls the sun across the sky. It symbolizes rebirth.',
-            'what is a cartouche': 'A cartouche is an oval loop that encircles the name of the pharaoh. It magically protects the king\'s name from evil spirits.',
-            'what is a sarcophagus': 'This is the outer stone coffin that protects the royal mummy. It is often carved with spells and the likeness of the deceased.',
-            'what is senet': 'Senet is our favorite board game! It is a game of passing, but it also represents the soul\'s journey through the underworld.',
-            'what is shabti': 'Shabtis are small figurines placed in the tomb. If the deceased is called to work in the afterlife, the shabti will magically answer, "Here I am," and do the work for them.',
-            'how did you treat illness': 'Our doctors are the best in the world. We use honey to prevent infection, moldy bread for wounds, and mix herbs with prayers to Sekhmet.',
-            'did you have a calendar': 'Yes! We invented the 365-day calendar based on the rising of the star Sirius. We have three seasons: Akhet (flood), Peret (planting), and Shemu (harvest).',
-            'how did you tell time': 'During the day, we use sundials and shadow clocks. At night, we use water clocks (clepsydras) and track the movement of the stars.',
-            'what is mathematics to you': 'We use math to measure our fields after the flood, calculate taxes, and design our pyramids. We use a decimal system, but no zero.',
-            'who is nefertiti': 'Nefertiti was the Great Royal Wife of Akhenaten. Her name means "The Beautiful One Has Come." She ruled alongside her husband as an equal.',
-            'who is djoser': 'Pharaoh Djoser was an Old Kingdom ruler. He built the very first pyramid, the Step Pyramid at Saqqara, designed by the genius Imhotep.',
-            'who is imhotep': 'Imhotep was a commoner who rose to become a vizier, architect, and doctor. He designed the Step Pyramid and was eventually worshipped as a god of healing.',
-            'who is sneferu': 'Sneferu was the father of Khufu. He was the greatest builder of all, building three pyramids: the Meidum, the Bent Pyramid, and the Red Pyramid.',
-            'what is a vizier': 'The Vizier is the second most powerful man in Egypt. He is the Pharaoh\'s right hand, overseeing the treasury, building projects, and the courts.',
-            'what is a scribe': 'A scribe, like me, is a master of writing. We are essential to the bureaucracy, recording grain stocks, taxes, and history. We are exempt from manual labor.',
-            'what is memphis': 'Memphis was the ancient capital of Egypt during the Old Kingdom. It is the home of the god Ptah and a center of trade.',
-            'what is alexandria': 'Ah, a city of the future built by the Greeks. It became famous for its Great Library and the Pharos Lighthouse, but it is not of my time.',
-            'what is the red land': 'The Red Land, or "Deshret," is the barren desert that surrounds our fertile valley. It is the domain of Seth and a place of chaos.',
-            'what is the black land': 'The Black Land, or "Kemet," is what we call our country. It is named after the rich, dark soil left by the Nile flood.',
-            'what is abu simbel': 'These are the massive rock temples built by Ramses II in Nubia to show his power to the southern neighbors. Four giant statues of him sit at the entrance.',
-            'what is the step pyramid': 'It is a staircase to the heavens! Instead of smooth sides, it consists of six mastabas stacked on top of each other.',
-            'what is a mastaba': 'Before pyramids, we buried our nobles in mastabas—flat-roofed, rectangular tombs made of mud-brick with sloping sides.',
-            'what is the hypostyle hall': 'It is a forest of stone! A massive hall in the Karnak temple filled with 134 gigantic columns, shaped like papyrus stalks.',
-            'what is mud brick': 'Most of our homes and palaces are built from mud mixed with straw and baked in the sun. Only temples and tombs are built of stone to last forever.',
-            'what is beer': 'Beer is our staple drink! It is thick, nutritious, and safer to drink than water. Even children drink it. We make it from barley bread.',
-            'did you have money': 'We do not use coins. We barter. We exchange goods based on a unit of value called the "deben," which is a weight of copper or silver.',
-            'how did you make paper': 'We cut the pith of the papyrus plant into strips, soak them, layer them crosswise, and press them until the sap acts as glue.',
-            'what is a sphinx': 'I have told you of the Great Sphinx, but many sphinxes exist. They are guardians with the body of a lion and the head of a king or a ram.',
-            'who is ra': 'Ra is the King of the Gods and the Sun God. He travels across the sky in his solar barque during the day and through the underworld at night.',
-            'who is anubis': 'Anubis is the jackal-headed god of mummification. He watches over the embalming process and guides souls to the Hall of Judgment.',
-            'who is osiris': 'Osiris is the Lord of the Underworld and Judge of the Dead. He symbolizes resurrection and eternal life.',
-            'who is isis': 'Isis is the goddess of magic, healing, and motherhood. She is the wife of Osiris and the mother of Horus, known for her powerful protective spells.',
-            'who is horus': 'Horus is the falcon-headed god of the sky and war. The living Pharaoh is believed to be the earthly embodiment of Horus.',
-            'who is bastet': 'Bastet is the cat goddess of the home, fertility, and protection. She defends the pharaoh and is the daughter of Ra.',
-            'who is thoth': 'Thoth is the ibis-headed god of wisdom and writing. As a scribe myself, I pray to him for guidance in recording history.',
-            'who is seth': 'Seth is the god of chaos, storms, and the desert. He is the brother of Osiris and represents the necessary disorder in the universe.',
-            'who is king tut': 'Tutankhamun was a boy king who restored the old gods. He is famous in your time because his tomb in the Valley of the Kings was found nearly untouched.',
-            'who is cleopatra': 'Cleopatra was the last active ruler of the Ptolemaic Kingdom. She was a brilliant diplomat and spoke many languages, fighting to keep Egypt independent.',
-            'who is ramses the great': 'Ramses II was one of our most powerful pharaohs. He ruled for 66 years, built massive temples like Abu Simbel, and fathered over 100 children.',
-            'who is hatshepsut': 'Hatshepsut was a rare female pharaoh who ruled with the power of a king. She established trade networks and built the magnificent temple at Deir el-Bahari.',
-            'who is akhenaten': 'Akhenaten was the "Heretic Pharaoh" who tried to change our religion to worship only one god, the Aten (the sun disk).',
-            'what did ancient egyptians eat': 'Our diet consists mainly of bread and beer, along with onions, garlic, lentils, and fish from the Nile. The wealthy also enjoy meats like goose and beef.',
-            'what is papyrus': 'Papyrus is a reed that grows along the Nile. We peel it and press it to create a surface for writing, but we also use it to make boats, mats, and sandals.',
-            'what are hieroglyphs': 'Hieroglyphs are "sacred carvings." It is our system of writing using pictures to represent sounds and ideas. Only scribes and priests are trained to read them.',
-            'did you have pets': 'Yes! We love animals. Cats are sacred to Bastet, but we also keep dogs for hunting and protection, and sometimes monkeys or baboons.',
-            'what did you wear': 'Because of the heat, we wear light linen clothing. Men wear kilts (shendyt), and women wear straight dresses. We also love jewelry and makeup.',
-            'why do you wear makeup': 'Both men and women wear kohl around their eyes. It protects our eyes from the harsh sun and evil spirits, and it mimics the appearance of the god Horus.',
-            'what is the rosetta stone': 'Ah, that is a stone from a later time! It contains the same decree written in three scripts: hieroglyphs, demotic, and Greek. It helped people of your time understand our language.',
-            'what is mummification': 'It is the sacred process of preserving the body. We remove the internal organs, dry the body with natron salt for 40 days, and wrap it in linen bandages.',
-            'what are canopic jars': 'These are four special jars used to store the internal organs—the stomach, intestines, lungs, and liver—protected by the four sons of Horus.',
-            'what is the book of the dead': 'It is a collection of spells and instructions placed in the tomb. It helps the deceased navigate the dangers of the underworld to reach the afterlife.',
-            'what is the weighing of the heart': 'In the afterlife, your heart is weighed against the Feather of Ma\'at (truth). If your heart is light with goodness, you enter paradise; if heavy with sin, it is devoured.',
-            'what is the nile river': 'The Nile is the father of life. It floods every year to bring rich black soil (silt) that allows us to grow crops in the middle of the desert.',
-            'what is the valley of the kings': 'It is a secluded valley on the west bank of the Nile where we buried our pharaohs and nobles in rock-cut tombs during the New Kingdom.',
-            'what is luxor': 'In my time, it was called Thebes, the great capital. It houses the massive Karnak and Luxor temples dedicated to the god Amun.',
-            'what is an obelisk': 'An obelisk is a tall, four-sided stone monument that tapers at the top like a pyramid. It represents a ray of sunlight petrified in stone.',
-            'how did you move the stones': 'We used the Nile to float stones on barges. On land, we used sleds pulled by many men, wetting the sand in front of the sled to reduce friction.',
-            'who are you': 'i am Amun Ra Your Ancient Egyptian Guide.',
-        };
-        
-        // Speech recognition setup
-        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-        let recognition;
-        
-        if (SpeechRecognition) {
-            recognition = new SpeechRecognition();
-            recognition.continuous = false;
-            recognition.interimResults = false;
-            recognition.lang = 'en-US';
-            
-            recognition.onstart = function() {
-                statusText.textContent = "Listening... Speak now";
-                micBtn.classList.add('listening');
-            };
-            
-            recognition.onresult = function(event) {
-                const transcript = event.results[0][0].transcript.toLowerCase();
-                statusText.textContent = "Processing your question...";
-                
-                // Find the best matching response
-                let response = responses.default;
-                for (const key in responses) {
-                    if (transcript.includes(key)) {
-                        response = responses[key];
-                        break;
+    <script type="text/javascript">
+        (function(d, t) {
+            var v = d.createElement(t), s = d.getElementsByTagName(t)[0];
+            v.onload = function() {
+                window.voiceflow.chat.load({
+                    verify: { projectID: '69201cecd73e70042529572b' },
+                    url: 'https://general-runtime.voiceflow.com',
+                    versionID: 'production',
+                    voice: {
+                        url: "https://runtime-api.voiceflow.com"
                     }
-                }
-                
-                // Display and speak the response
-                responseArea.textContent = response;
-                speakResponse(response);
-            };
-            
-            recognition.onerror = function(event) {
-                statusText.textContent = "Error occurred in recognition: " + event.error;
-                micBtn.classList.remove('listening');
-            };
-            
-            recognition.onend = function() {
-                statusText.textContent = "Click the microphone and speak";
-                micBtn.classList.remove('listening');
-            };
-        } else {
-            statusText.textContent = "Speech recognition not supported in this browser";
-            micBtn.disabled = true;
-        }
-        
-        // Text-to-speech function
-        function speakResponse(text) {
-            if ('speechSynthesis' in window) {
-                const utterance = new SpeechSynthesisUtterance(text);
-                utterance.rate = 0.9;
-                utterance.pitch = 0.8;
-                
-                // Animate mouth while speaking
-                utterance.onstart = function() {
-                    aiMouth.classList.add('talking');
-                };
-                
-                utterance.onend = function() {
-                    aiMouth.classList.remove('talking');
-                };
-                
-                speechSynthesis.speak(utterance);
-            } else {
-                responseArea.textContent += " (Text-to-speech not supported)";
+                });
             }
-        }
-        
-        // Event listener for microphone button
-        micBtn.addEventListener('click', function() {
-            if (recognition) {
-                recognition.start();
-            }
-        });
-        
-        // Add some random body movements to make the AI more lifelike
-        setInterval(() => {
-            const aiBody = document.querySelector('.ai-body');
-            aiBody.style.transform = `scale(${1 + Math.random() * 0.02})`;
-        }, 3000);
+            v.src = "https://cdn.voiceflow.com/widget-next/bundle.mjs"; 
+            v.type = "text/javascript"; 
+            s.parentNode.insertBefore(v, s);
+        })(document, 'script');
     </script>
-</body>
+    </body>
 </html>
